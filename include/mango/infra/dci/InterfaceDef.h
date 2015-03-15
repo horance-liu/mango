@@ -1,7 +1,7 @@
 #ifndef __DCM_BASE_INTERFACE_DEF_H__
 #define __DCM_BASE_INTERFACE_DEF_H__
 
-#include <infra/dci/Keywords.h>
+#include <mango/infra/dci/Keywords.h>
 
 typedef unsigned int InterfaceId;
 

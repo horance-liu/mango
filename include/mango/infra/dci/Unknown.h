@@ -1,8 +1,8 @@
 #ifndef OIWUEROIUERT_NBNMCMBVM_SKADHJSKJF_CBZJGHWQOSCKAG
 #define OIWUEROIUERT_NBNMCMBVM_SKADHJSKJF_CBZJGHWQOSCKAG
 
-#include "infra/dci/InterfaceDef.h"
-#include "infra/dci/Role.h"
+#include "mango/infra/dci/InterfaceDef.h"
+#include "mango/infra/dci/Role.h"
 
 namespace dci
 {

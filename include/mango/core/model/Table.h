@@ -1,7 +1,7 @@
 #ifndef HD0427729_04BB_4C5A_B301_B6F4CA86FDDC
 #define HD0427729_04BB_4C5A_B301_B6F4CA86FDDC
 
-#include "mango/base/mango.h"
+#include "mango/core/base/mango.h"
 #include <string>
 #include <vector>
 

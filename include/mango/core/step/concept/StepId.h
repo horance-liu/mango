@@ -1,7 +1,7 @@
 #ifndef HD436CA6B_204F_4128_ADA9_376B0C07DE64
 #define HD436CA6B_204F_4128_ADA9_376B0C07DE64
 
-#include "mango/base/mango.h"
+#include "mango/core/base/mango.h"
 #include <string>
 
 MANGO_NS_BEGIN

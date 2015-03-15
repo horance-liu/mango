@@ -18,16 +18,16 @@ Dependces:
 
 ### Install dependces:
 
-Install CMake:
+#### Install CMake:
 
     sudo apt-get install cmake
   
-Install Boost dependces:
+#### Install Boost dependces:
 
     sudo apt-get install libboost-thread-dev libboost-system-dev libboost-regex-dev libboost-date-time-dev libboost-test-dev google-mock
     cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ && cd -
 
-Install JsonCpp:
+#### Install JsonCpp:
 
     git clone https://github.com/open-source-parsers/jsoncpp.git
     mkdir -p build
@@ -36,21 +36,21 @@ Install JsonCpp:
     make
     sudo make install
 
-Install RVM:
+#### Install RVM:
 
     curl -L get.rvm.io | bash -s stable
     source /Users/horance/.rvm/scripts/rvm
     source ~/.bashrc
     source ~/.bash_profile
 
-Install Ruby:
+#### Install Ruby:
 
     rvm install 1.9.3
     
     rvm use 1.9.3
     rvm use 1.9.3 --default 
 
-Install Gems:
+#### Install Gems:
 
     sudo gem install bundle
     
@@ -59,9 +59,13 @@ Install Gems:
     
     bundle install
 
-###Build Mango:
+### Build and Install Mango:
 
-    ./build.sh
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
 
 ## Note on Patches/Pull Requests
 

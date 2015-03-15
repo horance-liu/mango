@@ -1,7 +1,7 @@
 #ifndef H9DC02549_17F2_475B_9D23_F0BA379189D0
 #define H9DC02549_17F2_475B_9D23_F0BA379189D0
 
-#include "infra/dci/Role.h"
+#include "mango/infra/dci/Role.h"
 #include "mango/core/step/concept/MatchingSteps.h"
 #include "mango/core/hook/registry/HookRegistries.h"
 #include "mango/core/model/Scenario.h"

@@ -1,7 +1,7 @@
 #ifndef H3D7EA396_E47B_41B8_8B5B_E7239D16FC4C
 #define H3D7EA396_E47B_41B8_8B5B_E7239D16FC4C
 
-#include "mango/base/mango.h"
+#include "mango/core/base/mango.h"
 #include <string>
 
 MANGO_NS_BEGIN

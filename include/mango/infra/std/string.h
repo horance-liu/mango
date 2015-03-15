@@ -1,7 +1,7 @@
 #ifndef HEA317698_FEF8_4B1B_AD3F_588C6A38F382
 #define HEA317698_FEF8_4B1B_AD3F_588C6A38F382
 
-#include <infra/std/stdext.h>
+#include <mango/infra/std/stdext.h>
 #include <sstream>
 
 STDEXT_NS_BEGIN

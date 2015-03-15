@@ -1,8 +1,8 @@
 #ifndef HC0A7BA6C_4704_426A_BFBE_068108FFE0D1
 #define HC0A7BA6C_4704_426A_BFBE_068108FFE0D1
 
-#include <infra/base/Symbol.h>
-#include "infra/std/source_file.h"
+#include <mango/infra/base/Symbol.h>
+#include "mango/infra/std/source_file.h"
 
 #include "mango/core/step/concept/GenericSteps.h"
 #include "mango/core/step/concept/GenericStep.h"

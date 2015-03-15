@@ -1,7 +1,7 @@
 #ifndef H9714A243_DE2D_4609_A80A_42FF8435F1A5
 #define H9714A243_DE2D_4609_A80A_42FF8435F1A5
 
-#include "mango/base/mango.h"
+#include "mango/core/base/mango.h"
 #include <string>
 
 MANGO_NS_BEGIN

@@ -1,8 +1,8 @@
 #ifndef H5F5BA50E_70B6_4C28_A319_7C43461D683E
 #define H5F5BA50E_70B6_4C28_A319_7C43461D683E
 
-#include "mango/base/mango.h"
-#include "infra/dci/Role.h"
+#include "mango/core/base/mango.h"
+#include "mango/infra/dci/Role.h"
 #include <string>
 
 MANGO_NS_BEGIN

@@ -1,8 +1,8 @@
 #ifndef H7BFF354D_D699_4873_91BE_FF8B10EEDD12
 #define H7BFF354D_D699_4873_91BE_FF8B10EEDD12
 
-#include "infra/dci/Role.h"
-#include "mango/base/mango.h"
+#include "mango/infra/dci/Role.h"
+#include "mango/core/base/mango.h"
 #include <string>
 
 MANGO_NS_BEGIN

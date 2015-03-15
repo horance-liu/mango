@@ -1,7 +1,7 @@
 #ifndef H3A6E97D9_E5A6_4F47_8A8A_EB0CE0249166
 #define H3A6E97D9_E5A6_4F47_8A8A_EB0CE0249166
 
-#include "infra/dci/Role.h"
+#include "mango/infra/dci/Role.h"
 #include "mango/core/hook/registry/HookRegistries.h"
 
 MANGO_NS_BEGIN

@@ -66,6 +66,8 @@ include_directories(${MANGO_INCLUDE_DIR})
 
 set(MANGO_LIBRARIES mango jsoncpp ${MANGO_EXTRA_LIBRARIES})
 
+install(DIRECTORY include/mango DESTINATION include)
+
 add_subdirectory(src)
 add_subdirectory(test)
 add_subdirectory(examples)

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <infra/std/algorithm.h>
-#include <infra/std/static_assert.h>
+#include <mango/infra/std/algorithm.h>
+#include <mango/infra/std/static_assert.h>
 
 namespace
 {

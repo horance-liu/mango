@@ -1,7 +1,7 @@
 #ifndef HF684758E_DF21_4935_A12B_C08437B519B1
 #define HF684758E_DF21_4935_A12B_C08437B519B1
 
-#include "infra/base/Singleton.h"
+#include "mango/infra/base/Singleton.h"
 #include "mango/core/step/concept/Steps.h"
 #include <vector>
 

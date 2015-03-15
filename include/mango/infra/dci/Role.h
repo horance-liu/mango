@@ -1,7 +1,7 @@
 #ifndef SFJDLLSDFLKSAF_LJSFDLSKFDLNV_CXHKJ
 #define SFJDLLSDFLKSAF_LJSFDLSKFDLNV_CXHKJ
 
-#include "infra/dci/Keywords.h"
+#include "mango/infra/dci/Keywords.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #define ROLE(role) get##role()

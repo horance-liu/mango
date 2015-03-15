@@ -1,7 +1,7 @@
 #ifndef H0CA46078_A790_4336_AB97_301191088474
 #define H0CA46078_A790_4336_AB97_301191088474
 
-#include "mango/base/mango.h"
+#include "mango/core/base/mango.h"
 #include <map>
 
 MANGO_NS_BEGIN

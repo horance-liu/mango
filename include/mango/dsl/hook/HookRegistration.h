@@ -1,8 +1,8 @@
 #ifndef HDD3AF611_DD45_4B48_9BD5_5FB5BEB2751A
 #define HDD3AF611_DD45_4B48_9BD5_5FB5BEB2751A
 
-#include <infra/base/Symbol.h>
-#include "mango/base/mango.h"
+#include <mango/infra/base/Symbol.h>
+#include "mango/core/base/mango.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 #define HOOK_NAME UNIQUE_NAME(HookObject)

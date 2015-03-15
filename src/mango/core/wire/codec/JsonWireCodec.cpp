@@ -18,7 +18,7 @@
 
 #include "json/json.h"
 
-#include "infra/base/Singleton.h"
+#include "mango/infra/base/Singleton.h"
 
 using namespace Json;
 

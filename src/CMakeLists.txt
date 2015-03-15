@@ -8,3 +8,5 @@ FILE(GLOB_RECURSE all_files
 sort_files(all_files)
 
 add_library(mango STATIC ${all_files})
+
+install(TARGETS mango ARCHIVE DESTINATION lib)
