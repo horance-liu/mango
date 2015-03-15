@@ -1,0 +1,11 @@
+#ifndef V5QXNQ43XXTMXNAPK3Y2BZSS68TYQZ2K2N8SROOF7R6O1ZL8KUF3V6A7               
+#define V5QXNQ43XXTMXNAPK3Y2BZSS68TYQZ2K2N8SROOF7R6O1ZL8KUF3V6A7
+
+#include <iostream>
+
+#define MANGO_NS mango
+#define MANGO_NS_BEGIN namespace MANGO_NS {
+#define MANGO_NS_END   }
+#define USING_MANGO_NS using namespace MANGO_NS;
+
+#endif
