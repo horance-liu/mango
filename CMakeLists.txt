@@ -64,7 +64,7 @@ set(MANGO_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 include_directories(${MANGO_INCLUDE_DIR})
 
-set(MANGO_LIBRARIES mango ${MANGO_EXTRA_LIBRARIES})
+set(MANGO_LIBRARIES mango jsoncpp ${MANGO_EXTRA_LIBRARIES})
 
 add_subdirectory(src)
 add_subdirectory(test)

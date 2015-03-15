@@ -13,8 +13,8 @@ echo "try to build ${working_path}"
 echo "*******************************************************************************"
 echo "start to generate makefile..."
 
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
+#export CC=/usr/bin/clang
+#export CXX=/usr/bin/clang++
 
 cmake -E make_directory build
 cmake -E chdir build cmake -DMANGO_ENABLE_EXAMPLES=on -DCMAKE_BUILD_TYPE=Debug ..
@@ -47,9 +47,13 @@ run_test std --gtest_filter=*.*
 run_test tags --gtest_filter=*.*
 run_test hooks --gtest_filter=*.*
 
+echo "*******************************************************************************"
+echo "start to run example calc..."
 build/examples/calc/calc_exec &
 cucumber examples/calc
 
+echo "*******************************************************************************"
+echo "start to run example tags..."
 build/examples/tags/tags_exec &
 cucumber examples/tags
 

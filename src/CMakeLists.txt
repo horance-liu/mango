@@ -1,7 +1,7 @@
 FILE(GLOB_RECURSE all_files
 *.cpp
 *.cc
-*.cxx
+*.c++
 *.c
 *.C)
 

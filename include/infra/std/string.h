@@ -49,6 +49,11 @@ std::string to_upper(const std::string& str);
 std::string to_lower(const std::string& str);
 
 ////////////////////////////////////////////////////////////////////////////////
+std::string trim(const std::string& str);
+std::string ltrim(const std::string& str);
+std::string rtrim(const std::string& str);
+
+////////////////////////////////////////////////////////////////////////////////
 #define __DO_STRINGIZE( symbol ) #symbol
 #define STRINGIZE(symbol) __DO_STRINGIZE(symbol)
 

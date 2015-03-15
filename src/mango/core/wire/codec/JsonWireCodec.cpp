@@ -16,12 +16,11 @@
 #include "mango/core/wire/response/StepMatchesResponse.h"
 #include "mango/core/wire/response/SnippetTextResponse.h"
 
-#include "json_spirit/json_spirit_reader_template.h"
-#include "json_spirit/json_spirit_writer_template.h"
+#include "json/json.h"
 
 #include "infra/base/Singleton.h"
 
-using namespace json_spirit;
+using namespace Json;
 
 MANGO_NS_BEGIN
 
@@ -29,16 +28,16 @@ namespace
 {
     DEFINE_ROLE(RequestDecoder)
     {
-        ABSTRACT(WireRequest* decode(const mValue& jsonArgs) const);
+        ABSTRACT(WireRequest* decode(const Value& jsonArgs) const);
     };
 
-    Tags& getTags(const mValue& jsonArgs, Tags& tags)
+    Tags& getTags(const Value& jsonArgs, Tags& tags)
     {
-        if (jsonArgs.is_null()) return tags;
+        if (jsonArgs.isNull()) return tags;
 
-        for (auto tag : jsonArgs.get_obj().find("tags")->second.get_array())
+        for (auto& tag : jsonArgs["tags"])
         {
-            tags.addTag(tag.get_str());
+            tags.addTag(tag.asString());
         }
 
         return tags;
@@ -46,7 +45,7 @@ namespace
 
     DEF_SINGLETON(BeginScenarioDecoder) EXTENDS(RequestDecoder)
     {
-        OVERRIDE(WireRequest *decode(const mValue& jsonArgs) const)
+        OVERRIDE(WireRequest *decode(const Value& jsonArgs) const)
         {
             Tags tags;
             return new BeginScenarioRequest(getTags(jsonArgs, tags));
@@ -55,7 +54,7 @@ namespace
 
     DEF_SINGLETON(EndScenarioDecoder) EXTENDS(RequestDecoder)
     {
-        OVERRIDE(WireRequest *decode(const mValue& jsonArgs) const)
+        OVERRIDE(WireRequest *decode(const Value& jsonArgs) const)
         {
             Tags tags;
             return new EndScenarioRequest(getTags(jsonArgs, tags));
@@ -64,82 +63,62 @@ namespace
 
     DEF_SINGLETON(StepMatchesDecoder) EXTENDS(RequestDecoder)
     {
-        OVERRIDE(WireRequest *decode(const mValue& jsonArgs) const)
+        OVERRIDE(WireRequest *decode(const Value& jsonArgs) const)
         {
-            mObject stepMatches(jsonArgs.get_obj());
-            return new StepMatchesRequest(stepMatches["name_to_match"].get_str());
+            return new StepMatchesRequest(jsonArgs["name_to_match"].asString());
         }
     };
 
     DEF_SINGLETON(InvokeDecoder) EXTENDS(RequestDecoder)
     {
-        OVERRIDE(WireRequest *decode(const mValue& jsonArgs) const)
+        OVERRIDE(WireRequest *decode(const Value& jsonArgs) const)
         {
-            mObject params(jsonArgs.get_obj());
-            return doDecode( params["id"].get_str()
-                           , params["args"].get_array());
+            return doDecode( jsonArgs["id"].asString()
+                           , jsonArgs["args"]);
         }
 
     private:
-        static WireRequest* doDecode(const std::string& id, const mArray& jsonArgs)
+        static WireRequest* doDecode(const std::string& id, const Value& jsonArgs)
         {
             InvokeArgs args;
-            fillInvokeArgs(jsonArgs, args);
+
+            for (auto& jsonArg : jsonArgs)
+            {
+                fillInvokeArg(jsonArg, args);
+            }
 
             return new InvokeRequest(id, args);
         }
 
-        static void fillInvokeArgs(const mArray& jsonArgs, InvokeArgs& args)
-        {
-            for (auto jsonArg : jsonArgs)
-            {
-                fillInvokeArg(jsonArg, args);
-            }
-        }
-
-        static void fillInvokeArg(const mValue& arg, InvokeArgs& args)
+        static void fillInvokeArg(const Value& arg, InvokeArgs& args)
         {
             switch(arg.type())
             {
-            case str_type:
-                args.addArg(arg.get_str());
+            case stringValue:
+                args.addArg(arg.asString());
                 break;
-            case array_type:
-                fillTable(arg.get_array(), args);
+            case arrayValue:
+                fillTable(arg, args);
                 break;
             default: break;
             }
         }
 
-        static void fillTable(const mArray& jsonTable, InvokeArgs& args)
+        static void fillTable(const Value& jsonTable, InvokeArgs& args)
         {
-            auto rows = jsonTable.size();
-            if (rows == 0) return;
-
-            auto columns = jsonTable[0].get_array().size();
-
-            doFillTable(jsonTable, rows, columns, args);
-        }
-
-        static void doFillTable
-            ( const mArray& jsonTable
-            , size_t rows
-            , size_t columns
-            , InvokeArgs& args)
-        {
-            for (auto i = 0lu; i < rows; ++i)
+            for (auto& rowJson :  jsonTable)
             {
-                fillRow(jsonTable[i].get_array(), columns, args);
+                fillRow(rowJson, args);
             }
         }
 
-        static void fillRow(const mArray& jsonRow, size_t columns, InvokeArgs& args)
+        static void fillRow(const Value& jsonRow, InvokeArgs& args)
         {
             Table::row_type row;
 
-            for (auto j = 0lu; j < columns; ++j)
+            for (auto& value : jsonRow)
             {
-                row.push_back(jsonRow[j].get_str());
+                row.push_back(value.asString());
             }
 
             args.addRow(std::move(row));
@@ -148,14 +127,12 @@ namespace
 
     DEF_SINGLETON(SnippetTextDecoder) EXTENDS(RequestDecoder)
     {
-        OVERRIDE(WireRequest *decode(const mValue& jsonArgs) const)
+        OVERRIDE(WireRequest *decode(const Value& jsonArgs) const)
         {
-            mObject snippet(jsonArgs.get_obj());
-
             return new SnippetTextRequest
-                    ( snippet["step_keyword"].get_str()
-                    , snippet["step_name"].get_str()
-                    , snippet["multiline_arg_class"].get_str());
+                    ( jsonArgs["step_keyword"].asString()
+                    , jsonArgs["step_name"].asString()
+                    , jsonArgs["multiline_arg_class"].asString());
         }
     };
 
@@ -169,10 +146,9 @@ namespace
         {"snippet_text",   WIRE_DECODER(SnippetTextDecoder)},
     };
 
-    mValue& getJsonArgs(mArray& jsonReq)
+    const Value& getJsonArgs(Value& jsonReq)
     {
-        static mValue nilValue;
-        return jsonReq.size() > 1 ? jsonReq[1] : nilValue;
+        return jsonReq.size() > 1 ? jsonReq[1] : Value::null;
     }
 
 #define ASSERT_JSON_TRUE(expr)                  \
@@ -180,11 +156,11 @@ namespace
         if (!(expr)) return new FailingRequest; \
     } while (0)
 
-    WireRequest* doDecode(mArray& jsonReq)
+    WireRequest* doDecode(Value& jsonReq)
     {
         ASSERT_JSON_TRUE(jsonReq.size() != 0);
 
-        auto decoder = decoders[jsonReq[0].get_str()];
+        auto decoder = decoders[jsonReq[0].asString()];
         ASSERT_JSON_TRUE(decoder != nullptr);
 
         return decoder->decode(getJsonArgs(jsonReq));
@@ -194,11 +170,16 @@ namespace
 WireRequest* JsonWireCodec::decode(const std::string& request) const
 {
     std::istringstream is(request);
-    mValue json;
+    Value json;
 
-    read_stream(is, json);
+    Reader reader;
 
-    return doDecode(json.get_array());
+    if (!reader.parse(is, json, false))
+    {
+        return nullptr;
+    }
+
+    return doDecode(json);
 }
 
 namespace
@@ -213,8 +194,7 @@ namespace
         std::string encode(WireResponse& response)
         {
             response.accept(*this);
-            const mValue value(jsonOutput);
-            return write_string(value, false);
+            return stdext::rtrim(writer.write(jsonOutput));
         }
 
     private:
@@ -225,7 +205,7 @@ namespace
 
         OVERRIDE(void visitFailureResponse(const FailureResponse& response))
         {
-            mObject detailObject;
+            Value detailObject;
 
             writeIfNotEmpty("message", response.getMsg(), detailObject);
             writeFailDetails(detailObject);
@@ -233,31 +213,30 @@ namespace
 
         OVERRIDE(void visitPendingResponse(const PendingResponse& response))
         {
-            mValue jsonReponse(response.getMsg());
+            Value jsonReponse(response.getMsg());
             output("pending", &jsonReponse);
         }
 
         OVERRIDE(void visitStepMatchesResponse(const StepMatchesResponse& response))
         {
-            mArray jsonMatches;
+            Value jsonMatches;
             for(auto& stepMatch : response.getMatchingSteps())
             {
                 writeStepMatch(stepMatch, jsonMatches);
             }
-            mValue jsonReponse(jsonMatches);
-            output("success", &jsonReponse);
+            output("success", &jsonMatches);
         }
 
         OVERRIDE(void visitSnippetTextResponse(const SnippetTextResponse& response))
         {
-            mValue jsonReponse(response.getStepSnippet());
+            Value jsonReponse(response.getStepSnippet());
             success(&jsonReponse);
         }
 
     private:
-        void writeStepMatch(const MatchingStep& step, mArray& jsonMatches)
+        void writeStepMatch(const MatchingStep& step, Value& jsonMatches)
         {
-            mObject jsonM;
+            Value jsonM;
 
             writeIfNotEmpty("id", step.id, jsonM);
             writeArgs(step, jsonM);
@@ -265,10 +244,10 @@ namespace
             writeIfNotEmpty("source", step.source, jsonM);
             writeIfNotEmpty("regexp", step.regexp, jsonM);
 
-            jsonMatches.push_back(jsonM);
+            jsonMatches.append(jsonM);
         }
 
-        void writeIfNotEmpty(const std::string& key, const std::string& value, mObject& jsonM)
+        void writeIfNotEmpty(const std::string& key, const std::string& value, Value& jsonM)
         {
             if (!value.empty())
             {
@@ -276,55 +255,48 @@ namespace
             }
         }
 
-        void writeArgs(const MatchingStep& step, mObject& jsonM)
+        void writeArgs(const MatchingStep& step, Value& jsonM)
         {
-            mArray jsonArgs;
+            Value jsonArgs(arrayValue);
             for(auto& ma : step.args)
             {
-                mObject jsonMa;
+                Value jsonMa;
                 jsonMa["val"] = ma.getValue();
                 jsonMa["pos"] = ma.getPosition();
-                jsonArgs.push_back(jsonMa);
+                jsonArgs.append(jsonMa);
             }
             jsonM["args"] = jsonArgs;
         }
 
-        void writeFailDetails(const mObject& detailObject)
+        void writeFailDetails(const Value& detailObject)
         {
-            if (detailObject.empty())
-            {
-                fail();
-            }
-            else
-            {
-                const mValue detail(detailObject);
-                fail(&detail);
-            }
+            detailObject.empty() ? fail() : fail(&detailObject);
         }
 
     private:
-        void success(const mValue *detail = 0)
+        void success(const Value *detail = 0)
         {
             output("success", detail);
         }
 
-        void fail(const mValue *detail = 0)
+        void fail(const Value *detail = 0)
         {
             output("fail", detail);
         }
 
-        void output(const char* type, const mValue* detail = 0)
+        void output(const char* type, const Value* detail = 0)
         {
-            jsonOutput.push_back(type);
+            jsonOutput.append(type);
 
-            if (detail != 0 && !detail->is_null())
+            if (detail != 0 && !detail->isNull())
             {
-                jsonOutput.push_back(*detail);
+                jsonOutput.append(*detail);
             }
         }
 
     private:
-        mArray jsonOutput;
+        Value jsonOutput;
+        FastWriter writer;
     };
 }
 
