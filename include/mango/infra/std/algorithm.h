@@ -65,7 +65,7 @@ inline OutputIterator filter(Container&& c, OutputIterator result, Predicate pre
 }
 
 template <typename Container>
-void clear(Container& c)
+void clear(Container&& c)
 {
     each(c, [](auto e) { delete e; });
     c.clear();

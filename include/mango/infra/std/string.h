@@ -3,6 +3,7 @@
 
 #include <mango/infra/std/stdext.h>
 #include <sstream>
+#include <stdexcept>
 
 STDEXT_NS_BEGIN
 

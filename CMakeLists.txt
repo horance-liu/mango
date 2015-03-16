@@ -30,13 +30,11 @@ ENDMACRO(sort_files)
 #
 
 if(UNIX)
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Weffc++")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
 elseif(MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /vmg")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNOMINMAX")
 endif()
-
 
 #
 # Boost
@@ -64,7 +62,7 @@ set(MANGO_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 include_directories(${MANGO_INCLUDE_DIR})
 
-set(MANGO_LIBRARIES mango jsoncpp ${MANGO_EXTRA_LIBRARIES})
+set(MANGO_LIBRARIES mango jsoncpp gtest pthread ${MANGO_EXTRA_LIBRARIES})
 
 install(DIRECTORY include/mango DESTINATION include)
 

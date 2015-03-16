@@ -6,15 +6,25 @@ Mango is the a simple implement for cucumber using C++11/14, it allows cucumber 
 
 Supported Compilers:
 * [LLVM] 6.0 or later.
-* [GCC] 1.8 or later.
+* [GCC] 4.9 or later.
 * [MSVC] not supported.
 
 Dependces:
-* [Boost](http://www.boost.org/) 1.51 or later.
+* [Boost](http://www.boost.org/) 1.57 or later.
 * [Google Test](http://code.google.com/p/googletest/) 1.6 or later.
-* [JsonCpp](https://github.com/open-source-parsers/jsoncpp).
+* [JsonCpp](https://github.com/open-source-parsers/jsoncpp) 1.6 or later
 
 ## Installation
+
+### Update GCC to 4.9
+
+In order to support full C++11/14 features, to update GCC to 4.9 or later.
+
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+    sudo apt-get update
+    sudo apt-get install gcc-4.9 g++-4.9
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
+    sudo update-alternatives --config gcc
 
 ### Install dependces:
 
@@ -24,8 +34,20 @@ Dependces:
   
 #### Install Boost dependces:
 
-    sudo apt-get install libboost-thread-dev libboost-system-dev libboost-regex-dev libboost-date-time-dev libboost-test-dev google-mock
-    cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ && cd -
+    sudo apt-get install libboost-thread-dev libboost-system-dev libboost-regex-dev libboost-date-time-dev libboost-test-dev
+
+#### Install Google Test dependces:
+
+    sudo apt-get install google-mock
+    cd /usr/src/gmock/gtest
+    sudo mkdir build
+    cd build
+    sudo cmake ..
+    sudo make
+    sudo mv libg* /usr/local/lib/ 
+    cd ..
+    sudo cp -aR include/gtest/ /usr/local/include/
+    sudo ldconfig
 
 #### Install JsonCpp:
 
@@ -35,29 +57,35 @@ Dependces:
     cmake -DCMAKE_BUILD_TYPE=debug -DJSONCPP_LIB_BUILD_STATIC=ON -DJSONCPP_LIB_BUILD_SHARED=OFF ..
     make
     sudo make install
+    sudo ldconfig
 
 #### Install RVM:
 
+##### For Chinese User
+    
+    sed -i 's!cache.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' ~/.rvm/config/db
+
     curl -L get.rvm.io | bash -s stable
-    source /Users/horance/.rvm/scripts/rvm
+    source ~/.rvm/scripts/rvm
     source ~/.bashrc
     source ~/.bash_profile
 
 #### Install Ruby:
 
-    rvm install 1.9.3
+    rvm install 2.1.5
     
-    rvm use 1.9.3
-    rvm use 1.9.3 --default 
+    rvm use 2.1.5
+    rvm use 2.1.5 --default 
 
 #### Install Gems:
-
-    sudo gem install bundle
     
     rvm gemset create cucumber
     rvm gemset use cucumber
     
+    sudo gem install bundle
     bundle install
+
+    rvm use ruby-2.1.5@cucumber --default
 
 ### Build and Install Mango:
 
