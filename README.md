@@ -80,12 +80,10 @@ In order to support full C++11/14 features, to update GCC to 4.9 or later.
 #### Install Gems:
     
     rvm gemset create cucumber
-    rvm gemset use cucumber
+    rvm gemset use cucumber --default
     
     sudo gem install bundle
     bundle install
-
-    rvm use ruby-2.1.5@cucumber --default
 
 ### Build and Install Mango:
 
