@@ -61,10 +61,6 @@ In order to support full C++11/14 features, to update GCC to 4.9 or later.
 
 #### Install RVM:
 
-##### For Chinese User
-    
-    sed -i 's!cache.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' ~/.rvm/config/db
-
     curl -L get.rvm.io | bash -s stable
     source ~/.rvm/scripts/rvm
     source ~/.bashrc
@@ -92,6 +88,12 @@ In order to support full C++11/14 features, to update GCC to 4.9 or later.
     cmake ..
     make
     sudo make install
+
+## For Chinese Rubies
+
+    gem sources --remove https://rubygems.org
+    gem sources --add https://ruby.taobao.org
+    gem sources --list
 
 ## Note on Patches/Pull Requests
 
