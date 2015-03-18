@@ -4,6 +4,10 @@ Mango is the a simple implement for cucumber using C++11/14, it allows cucumber 
 
 * [Mango Website](http://gitlab.com/horance/mango)
 
+Supported Platform:
+* Ubuntu
+* MAC OS X
+
 Supported Compilers:
 * [LLVM] 6.0 or later.
 * [GCC] 4.9 or later.
@@ -20,7 +24,7 @@ Dependces:
 
 In order to support full C++11/14 features, to update GCC to 4.9 or later.
 
-    sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+    sudo -E add-apt-repository ppa:ubuntu-toolchain-r/test
     sudo apt-get update
     sudo apt-get install gcc-4.9 g++-4.9
     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
@@ -36,7 +40,7 @@ In order to support full C++11/14 features, to update GCC to 4.9 or later.
 
     sudo apt-get install libboost-thread-dev libboost-system-dev libboost-regex-dev libboost-date-time-dev libboost-test-dev
 
-#### Install Google Test dependces:
+#### Install Google Test:
 
     sudo apt-get install google-mock
     cd /usr/src/gmock/gtest
@@ -78,10 +82,10 @@ In order to support full C++11/14 features, to update GCC to 4.9 or later.
     rvm gemset create cucumber
     rvm gemset use cucumber --default
     
-    sudo gem install bundle
+    gem install bundle
     bundle install
 
-### Build and Install Mango:
+### Install Mango:
 
     mkdir build
     cd build
@@ -91,19 +95,9 @@ In order to support full C++11/14 features, to update GCC to 4.9 or later.
 
 ## For Chinese Rubies
 
-    gem sources --remove https://rubygems.org
-    gem sources --add https://ruby.taobao.org
+    gem sources --remove https://rubygems.org/
+    gem sources --add https://ruby.taobao.org/
     gem sources --list
-
-## Note on Patches/Pull Requests
-
-* Fork the project.
-* Run `bundle install` to install dependencies.
-* Run `build.sh` to make sure all the tests are passing.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a future version unintentionally.
-* Commit, do not mess with History.md.
-* Send me a pull request. Bonus points for topic branches.
 
 ## Copyright
 Copyright (c) 2015-2020 Horance Liu. See LICENSE for details.
