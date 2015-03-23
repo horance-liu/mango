@@ -9,7 +9,7 @@ Supported Platform:
 * MAC OS X
 
 Supported Compilers:
-* [LLVM] 6.0 or later.
+* [CLANG] 3.5 or later.
 * [GCC] 4.9 or later.
 * [MSVC] not supported.
 
