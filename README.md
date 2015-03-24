@@ -53,6 +53,16 @@ In order to support full C++11/14 features, to update GCC to 4.9 or later.
     sudo cp -aR include/gtest/ /usr/local/include/
     sudo ldconfig
 
+#### Install Infra
+
+    git clone https://gitlab.com/horance/infra.git
+    cd infra
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
+
 #### Install JsonCpp:
 
     git clone https://github.com/open-source-parsers/jsoncpp.git
