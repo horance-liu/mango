@@ -1,5 +1,5 @@
 #include "mango/core/model/Tags.h"
-#include "mango/infra/std/algorithm.h"
+#include "l0-infra/std/algorithm.h"
 
 MANGO_NS_BEGIN
 
@@ -15,7 +15,7 @@ inline bool Tags::contains(const std::string& tag) const
 
 bool Tags::contains(const Tags& rhs) const
 {
-    auto pred = [&](const std::string& tag) {
+    auto pred = [&](auto& tag) {
         return rhs.contains(tag);
     };
 

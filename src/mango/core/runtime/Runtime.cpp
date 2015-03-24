@@ -4,7 +4,7 @@
 #include "mango/core/wire/server/WireHandler.h"
 #include "mango/core/wire/server/WireServer.h"
 #include "mango/core/wire/codec/JsonWireCodec.h"
-#include "mango/infra/std/string.h"
+#include "l0-infra/std/string.h"
 #include "gtest/gtest.h"
 
 MANGO_NS_BEGIN

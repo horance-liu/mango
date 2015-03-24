@@ -1,8 +1,8 @@
 #ifndef HC0A7BA6C_4704_426A_BFBE_068108FFE0D1
 #define HC0A7BA6C_4704_426A_BFBE_068108FFE0D1
 
-#include <mango/infra/base/Symbol.h>
-#include "mango/infra/std/source_file.h"
+#include <l0-infra/std/Symbol.h>
+#include "l0-infra/std/SourceFile.h"
 
 #include "mango/core/step/concept/GenericSteps.h"
 #include "mango/core/step/concept/GenericStep.h"
@@ -37,7 +37,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #define __DEF_STEP(matcher, unique_id)                                         \
 ::mango::GenericStep<unique_id, steps_type> __UNIQUE_NAME(var_Step, unique_id) \
-    {matcher, SOURCE_FILE(), &steps_type::__STEP_NAME(unique_id)};             \
+    {matcher, SHORT_FILE(), &steps_type::__STEP_NAME(unique_id)};             \
     void __STEP_NAME(unique_id)(const ::mango::InvokeArgs& args)
 
 ////////////////////////////////////////////////////////////////////////////////

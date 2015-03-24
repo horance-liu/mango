@@ -2,7 +2,7 @@
 #define H5F5BA50E_70B6_4C28_A319_7C43461D683E
 
 #include "mango/core/base/mango.h"
-#include "mango/infra/dci/Role.h"
+#include "l0-infra/base/Role.h"
 #include <string>
 
 MANGO_NS_BEGIN

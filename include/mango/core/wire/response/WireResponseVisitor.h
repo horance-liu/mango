@@ -1,7 +1,7 @@
 #ifndef H7C246A07_7084_4AF6_AAEB_E255ADE0C740
 #define H7C246A07_7084_4AF6_AAEB_E255ADE0C740
 
-#include "mango/infra/dci/Role.h"
+#include "l0-infra/base/Role.h"
 #include "mango/core/base/mango.h"
 
 MANGO_NS_BEGIN

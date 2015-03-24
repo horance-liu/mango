@@ -43,7 +43,6 @@ function run_test()
   exec_on_fail "build/test/$1/mango-test-$1 $2 --gtest_color=yes"
 }
 
-run_test std --gtest_filter=*.*
 run_test tags --gtest_filter=*.*
 run_test hooks --gtest_filter=*.*
 

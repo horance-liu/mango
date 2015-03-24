@@ -1,7 +1,7 @@
 #ifndef H8CEF5425_905F_4AED_AED9_5AFCE501370E
 #define H8CEF5425_905F_4AED_AED9_5AFCE501370E
 
-#include <mango/infra/dci/Role.h>
+#include <l0-infra/base/Role.h>
 #include <mango/core/base/mango.h>
 
 MANGO_NS_BEGIN

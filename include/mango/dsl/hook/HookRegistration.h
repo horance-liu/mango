@@ -1,7 +1,7 @@
 #ifndef HDD3AF611_DD45_4B48_9BD5_5FB5BEB2751A
 #define HDD3AF611_DD45_4B48_9BD5_5FB5BEB2751A
 
-#include <mango/infra/base/Symbol.h>
+#include <l0-infra/std/Symbol.h>
 #include "mango/core/base/mango.h"
 
 ////////////////////////////////////////////////////////////////////////////////
